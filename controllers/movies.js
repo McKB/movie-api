@@ -12,7 +12,15 @@ const getMovieBySearch = (req, res) => {
   let foundMovieDirector = findMovieByDirector(search)
 
   if (foundMovieTitle.length || foundMovieDirector.length) {
-    return res.status(201).send([...foundMovieTitle, ...foundMovieDirector])
+    let movieList = [...foundMovieTitle, ...foundMovieDirector]
+
+    movieList = removeDuplicates(movieList)
+
+    return res.status(201).send(movieList)
+  }
+
+  else {
+    return res.status(404).send('Not on our list :/')
   }
 }
 
@@ -47,6 +55,18 @@ const findMovieByDirector = (search) => {
   })
 
   return foundMovies
+}
+
+const removeDuplicates = (movieList) => {
+  let newList = []
+
+  for (let movie of movieList) {
+    if (!newList.includes(movie)) {
+      newList.push(movie)
+    }
+  }
+
+  return newList
 }
 
 
