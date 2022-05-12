@@ -7,7 +7,20 @@ const getAllMovies = (req, res) => {
 const getMovieBySearch = (req, res) => {
   const { search } = req.params
   // search through titles and directors
-  const foundMovieTitle = movies.filter(movie => {
+  let foundMovieTitle = findMovieByTitle(search)
+
+  let foundMovieDirector = findMovieByDirector(search)
+
+  if (foundMovieTitle.length || foundMovieDirector.length) {
+    return res.status(201).send([...foundMovieTitle, ...foundMovieDirector])
+  }
+}
+
+const addMovie = (req, res) => {}
+
+
+const findMovieByTitle = (search) => {
+  let foundMovies = movies.filter(movie => {
     const { title } = movie
 
     if (title.toLowerCase().includes(search)) {
@@ -17,13 +30,11 @@ const getMovieBySearch = (req, res) => {
     }
   })
 
-  if (foundMovieTitle.length > 0) {
-    return res.status(201).send(foundMovieTitle)
-  }
+  return foundMovies
+}
 
-  // || movie.directors.forEach(director => { director.includes(search)
-
-  const foundMovieDirector = movies.filter(movie => {
+const findMovieByDirector = (search) => {
+  let foundMovies = movies.filter(movie => {
     const { directors } = movie
 
     for (let director of directors) {
@@ -35,18 +46,10 @@ const getMovieBySearch = (req, res) => {
     return false
   })
 
-  // if found, send movie
-  if (foundMovieDirector.length > 0) {
-    return res.status(201).send(foundMovieDirector)
-  }
-
-  // if not found, send not found
-  else {
-    return res.status(404).send('Not on our list!')
-  }
+  return foundMovies
 }
 
-const addMovie = (req, res) => {}
+
 
 module.exports = { getAllMovies, getMovieBySearch, addMovie }
 
