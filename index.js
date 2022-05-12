@@ -1,12 +1,10 @@
 const express = require('express')
 const app = express()
-const { getAllMovies, getMovieByTitle, getMovieByDirector, addMovie } = require('./controllers/movies')
+const { getAllMovies, getMovieBySearch, addMovie } = require('./controllers/movies')
 
 app.get('/movies', getAllMovies)
 
-app.get('/movies/:title', getMovieByTitle)
-
-app.get('/movies/:director', getMovieByDirector)
+app.get('/movies/:search', getMovieBySearch)
 
 app.post('/movies', addMovie)
 
