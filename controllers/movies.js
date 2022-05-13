@@ -24,7 +24,21 @@ const getMovieBySearch = (req, res) => {
   }
 }
 
-const addMovie = (req, res) => {}
+const addMovie = (req, res) => {
+  const {
+    title, directors, releaseDate, rating, runTime, genres
+  } = req.body
+
+  if (!title || !directors || !releaseDate || !rating || !runTime || !genres) {
+    return res.status(400).send('Required: title, directors, releaseDate, rating, runTime, genres')
+  }
+
+  const newMovie = req.body
+
+  movies.push(newMovie)
+
+  return res.status(201).send(newMovie)
+}
 
 
 const findMovieByTitle = (search) => {
@@ -68,7 +82,6 @@ const removeDuplicates = (movieList) => {
 
   return newList
 }
-
 
 
 module.exports = { getAllMovies, getMovieBySearch, addMovie }
