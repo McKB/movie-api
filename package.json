@@ -1,0 +1,29 @@
+{
+  "name": "movie-api",
+  "version": "1.0.0",
+  "description": "## Instructions",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "lint": "eslint --format codeframe .",
+    "lint:fix": "eslint --fix --format codeframe .",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/McKB/movie-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/McKB/movie-api/issues"
+  },
+  "homepage": "https://github.com/McKB/movie-api#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "nodemon": "^2.0.16"
+  }
+}
